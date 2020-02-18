@@ -1,0 +1,35 @@
+[PropertyInfo]
+btnApply,javax.swing.JButton,false,false, , ,false,<default>
+cbxJspTemplate,javax.swing.JComboBox,false,false, , ,false,<default>
+cbxLinksJspTemplate,javax.swing.JComboBox,false,false, , ,false,<default>
+cbxLocation,javax.swing.JComboBox,false,false, , ,false,<default>
+cbxTilesBaseDefinition,javax.swing.JComboBox,false,false, , ,false,<default>
+chkGenerateSeparateLinksJsp,javax.swing.JCheckBox,false,false, , ,false,<default>
+chkUseTilesFramework,javax.swing.JCheckBox,false,false, , ,false,<default>
+lblFilename,javax.swing.JLabel,false,false, , ,false,<default>
+lblJspTemplate,javax.swing.JLabel,false,false, , ,false,<default>
+lblLinksJsp,javax.swing.JLabel,false,false, , ,false,<default>
+lblLinksJspTemplate,javax.swing.JLabel,false,false, , ,false,<default>
+lblLocation,javax.swing.JLabel,false,false, , ,false,<default>
+lblTilesBaseDefinition,javax.swing.JLabel,false,false, , ,false,<default>
+lblTilesExtendedDefinition,javax.swing.JLabel,false,false, , ,false,<default>
+lblTitle,javax.swing.JLabel,false,false, , ,false,<default>
+loInput,com.jgoodies.forms.layout.FormLayout,false,false, , ,false,<default>
+loPanel,java.awt.BorderLayout,false,false, , ,false,<default>
+model,com.xradsolutions.xrad.codegen.struts.model.StrutsModel,false,false, , ,true,<default>
+owner,javax.swing.JComponent,false,false, , ,false,<default>
+pnlInput,javax.swing.JPanel,false,false, , ,false,<default>
+puts,java.util.LinkedHashMap,false,false, , ,false,<default>
+self,com.xradsolutions.xrad.codegen.struts.StrutsJspPanel,false,false, , ,false,<default>
+spTilesDefinitions,javax.swing.JScrollPane,false,false, , ,false,<default>
+strutsJsp,com.xradsolutions.xrad.codegen.struts.model.StrutsJsp,false,false, , ,true,<default>
+tblTilesExtendedDefinition,javax.swing.JTable,false,false, , ,false,<default>
+tilesTableModel,javax.swing.table.DefaultTableModel,false,false, , ,false,<default>
+txtJspFile,javax.swing.JTextField,false,false, , ,false,<default>
+txtLinksJspFile,javax.swing.JTextField,false,false, , ,false,<default>
+txtTitle,javax.swing.JTextField,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <form-beans>
+#foreach($form in ${model.forms.values()})
+    <form-bean name="${form.identifier}" type="${form.packageName}.${form.className}"/>
+#end
+  </form-beans>
+
+  <action-mappings>
+#foreach($jsp in ${model.jsps.values()})
+#set($jspPath = "${jsp.location}${jsp.jspFile}")
+#if(${jsp.useTilesFramework})
+#set($jspPath = "${jsp.location}${jsp.jspFile}.tiles")
+#end
+#set($form = ${jsp.backingForm})
+#set($action = ${jsp.backingAction})
+    <action path="${jsp.location}${action.getNIdentifier()}" type="${action.packageName}.${action.className}" name="${form.identifier}" scope="request" input="$jspPath">
+#foreach($forward in ${action.forwards.values()})
+      <forward name="${forward.name}" path="${forward.getNPath()}"/>
+#end
+    </action>
+#end
+#foreach($action in ${model.actions.values()})
+#if(!${action.backingAction})
+    <action path="/${action.identifier}" type="${action.packageName}.${action.className}" name="virtualForm" scope="request">
+#foreach($forward in ${action.forwards.values()})
+      <forward name="${forward.name}" path="${forward.getNPath()}"/>
+#end
+    </action>
+#end
+#end
+  </action-mappings>
+  <message-resources parameter="${modelFileName}ApplicationResources" />
+#if(${jsp.getTilesBaseDefinition()})
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property property="definitions-config" value="/WEB-INF/tiles-base-defs.xml,/WEB-INF/tiles-extended-defs.xml" />
+  </plug-in>
+#end
+</struts-config>

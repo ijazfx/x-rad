@@ -1,0 +1,73 @@
+package ${form.packageName};
+
+import javax.servlet.http.*;
+import org.apache.struts.action.*;
+
+/**
+ * Provides properties for ${form.className.substring(0,${form.className.lastIndexOf("Form")})}.jsp page
+ * <p>Title: ${appModel.getTitle()}</p> 
+ * 
+ * <p>Copyright: Copyright (c) 2007</p> 
+ * 
+ * <p>Company: ${appModel.getCompany()}</p>
+ * 
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+public abstract class ${form.className}Base
+    extends ActionForm {
+#foreach($property in ${form.properties.values()})
+  protected ${property.dataType} ${property.name};
+#end
+  protected String method = "";
+  protected String selectedItem_ = "";
+  protected String pageNo_ = "";
+  protected String orderBy_ = "";
+
+
+#foreach($property in ${form.properties.values()})
+  public ${property.dataType} get${property.name.toUpperCase().charAt(0)}${property.name.substring(1, ${property.name.length()})}() {
+    return ${property.name};
+  }
+
+  public void set${property.name.toUpperCase().charAt(0)}${property.name.substring(1, ${property.name.length()})}(${property.dataType} ${property.name}) {
+    this.${property.name} = ${property.name};
+  }
+
+#end
+  
+  public void setMethod(String method) {
+    this.method = method;
+  }
+
+  public String getMethod() {
+    return method;
+  }
+
+  public void setSelectedItem_(String selectedItem_) {
+    this.selectedItem_ = selectedItem_;
+  }
+
+  public String getSelectedItem_() {
+    return selectedItem_;
+  }
+
+  public void setOrderBy_(String orderBy_) {
+    this.orderBy_ = orderBy_;
+  }
+
+  public String getOrderBy_() {
+    return orderBy_;
+  }
+
+  public void setPageNo_(String pageNo_) {
+    this.pageNo_ = pageNo_;
+  }
+
+  public String getPageNo_() {
+    return pageNo_;
+  }
+
+
+}

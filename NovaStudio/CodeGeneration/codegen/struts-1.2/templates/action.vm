@@ -1,0 +1,118 @@
+// Auto-generated class by x-RAD Struts 1.2 Code Generator Version 1.0. This
+// class is overwritten each time the code is regenerated so please do not
+// modify or add your code in this class but use extended class for
+// customization.
+package ${action.packageName};
+
+import javax.servlet.http.*;
+
+import org.apache.struts.action.*;
+import ${virtualFormPackageName}.VirtualForm;
+#foreach ($inboundForm in ${action.inboundActionForms.values()})
+import ${inboundForm.packageName}.${inboundForm.className};
+#end
+#foreach ($outboundForm in ${action.outboundActionForms.values()})
+import ${outboundForm.packageName}.${outboundForm.className};
+#end
+#set($defaultForward = ${action.getForwards().values().iterator().next()})
+#set($outboundForm = ${action.outboundActionForms.get(${defaultForward.name})})
+
+public class ${action.className}
+    extends ${action.className}Base {
+
+  /**
+   * preExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward preExecute(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = null;
+
+    // Add your code here...
+
+    return forward;
+  }
+
+  /**
+   * defaultExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward defaultExecute(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = mapping.findForward(FORWARD_DEFAULT);
+#if($outboundForm && (${outboundForm.identifier} != "virtualForm"))
+    ${outboundForm.className} ${outboundForm.identifier} = new ${outboundForm.className}();
+    ${outboundForm.identifier}.setInboundForm(virtualForm);
+    request.setAttribute("${outboundForm.identifier}", ${outboundForm.identifier});
+#end
+
+    // Add your code here...
+
+    return forward;
+}
+
+  /**
+   * postExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   */
+  public void postExecute(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    HttpServletRequest request,
+    HttpServletResponse response) {
+
+    // Add your code here...
+
+  }
+
+#foreach($inboundForm in ${action.inboundActionForms})
+  /**
+   * inbound${inboundForm.className}
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param inboundForm ${inboundForm.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward inbound${inboundForm.className}(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    ${inboundForm.className} inboundForm,
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = mapping.findForward(FORWARD_DEFAULT);
+#if($outboundForm && (${outboundForm.identifier} != "virtualForm"))
+    ${outboundForm.className} ${outboundForm.identifier} = new ${outboundForm.className}();
+    ${outboundForm.identifier}.setInboundForm(virtualForm);
+    request.setAttribute("${outboundForm.identifier}", ${outboundForm.identifier});
+#end
+
+    // Add your code here...
+
+    return forward;
+  }
+
+#end
+}

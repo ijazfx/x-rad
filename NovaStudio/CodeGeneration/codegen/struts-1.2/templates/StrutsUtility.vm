@@ -1,0 +1,91 @@
+package ${appModel.packageName}.util;
+
+/**
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+import javax.servlet.http.*;
+import org.apache.struts.config.*;
+import org.apache.struts.action.*;
+
+public class StrutsUtility {
+
+  public static ActionMessages getActionErrors(String property, String key,
+                                               Object object) {
+    ActionMessage message = new ActionMessage(key, object);
+    ActionMessages messages = new ActionMessages();
+    messages.add(property, message);
+    return messages;
+  }
+
+  public static ActionMessages getActionErrors(String key, Object[] object) {
+    ActionMessage message = new ActionMessage(key, object);
+    ActionMessages messages = new ActionMessages();
+    messages.add("nova-error", message);
+    return messages;
+  }
+
+  public static ActionMessages getActionErrors(String property, String key) {
+    ActionMessage message = new ActionMessage(key);
+    ActionMessages messages = new ActionMessages();
+    messages.add(property, message);
+    return messages;
+  }
+
+  public static ActionMessages getActionErrors(String key) {
+    ActionMessage message = new ActionMessage(key);
+    ActionMessages messages = new ActionMessages();
+    messages.add("nova-error", message);
+    return messages;
+  }
+
+  public static ActionForward getRedirectForward(ActionForward forward) {
+    return getRedirectForward(forward, null);
+  }
+
+  public static ActionForward getRedirectForward(ActionForward forward,
+                                                 String queryString) {
+    String str = queryString == null ? "" : queryString;
+    return new ActionForward(forward.getPath() + str, true);
+  }
+
+  /**
+   * Stores ActionForm in the request for the target Action
+   * @param request HttpServletRequest
+   * @param form ActionForm
+   */
+
+  public static void storeForm(HttpServletRequest request, ActionForm form) {
+    String name = form.getClass().getName().substring(form.getClass().getName().
+        lastIndexOf(".") + 1);
+    name = "" + Character.toLowerCase(name.charAt(0)) + name.substring(1);
+    request.setAttribute("_" + name, form);
+  }
+
+  /**
+   * Return LoginForm stored in the request
+   * @param request HttpServletRequest
+   * @param loginForm LoginForm
+   * @return LoginForm
+   */
+
+  public static ActionForm loadForm(HttpServletRequest request,ActionForm actionForm) {
+    String name = actionForm.getClass().getName();
+    name = name.substring(name.lastIndexOf(".")+1);
+    name = ""+Character.toLowerCase(name.charAt(0))+name.substring(1);
+    Object form = request.getAttribute("_"+name);
+    if(form!=null) {
+      request.setAttribute(name,form);
+      actionForm = (ActionForm) form;
+    }
+    return actionForm;
+  }
+
+}

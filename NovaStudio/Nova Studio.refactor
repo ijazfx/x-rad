@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refactor PUBLIC "-//Borland Software Corporation//Refactor 1.0//EN" "http://www.borland.com/devsupport/jbuilder/dtds/refactor_1_0.dtd">
+<refactor>
+  <rename-class id="J9P08GM5195F0TX552C5AS2" creation-time="Sun Aug 12 13:05:43.024 AST 2007">
+    <old-class-name>com.xradsolutions.xrad.codegen.struts.StrutsCodeGenerator</old-class-name>
+    <new-class-name>com.xradsolutions.xrad.codegen.struts.XCodeGeneratorImpl</new-class-name>
+  </rename-class>
+  <rename-method id="M9P0R6763F5FO0PGI7U0QKH0" creation-time="Thu Aug 16 16:53:55.125 AST 2007">
+    <declaring-class-name>com.xradsolutions.xrad.codegen.generators.StrutsCodeGenerator</declaring-class-name>
+    <declared-method-signature>()V</declared-method-signature>
+    <old-method-name>generateStaImpl</old-method-name>
+    <new-method-name>generateStantdard</new-method-name>
+  </rename-method>
+  <rename-method id="K9P0R6763F5FO0PGI7U0QKH0" creation-time="Thu Aug 16 16:54:45.046 AST 2007">
+    <declaring-class-name>com.xradsolutions.xrad.codegen.generators.StrutsCodeGenerator</declaring-class-name>
+    <declared-method-signature>()V</declared-method-signature>
+    <old-method-name>ase1</old-method-name>
+    <new-method-name>generateVersionOne</new-method-name>
+  </rename-method>
+</refactor>

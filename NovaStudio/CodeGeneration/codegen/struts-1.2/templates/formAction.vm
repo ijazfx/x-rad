@@ -1,0 +1,183 @@
+#set ($form = ${jsp.backingForm})
+#set ($action = ${jsp.backingAction})
+// Auto-generated class by x-RAD Struts 1.2 Code Generator Version 1.0. This
+// class is overwritten each time the code is regenerated so please do not
+// modify or add your code in this class but use extended class for
+// customization.
+package ${action.packageName};
+
+import javax.servlet.http.*;
+
+import org.apache.struts.action.*;
+import com.novamethods.web.util.struts.*;
+import com.novamethods.web.util.session.*;
+import ${form.packageName}.${form.className};
+#foreach ($inboundForm in ${action.inboundActionForms.values()})
+import ${inboundForm.packageName}.${inboundForm.className};
+#end
+#foreach ($outboundForm in ${action.outboundActionForms.values()})
+#if($outboundForm)
+import ${outboundForm.packageName}.${outboundForm.className};
+#end
+#end
+
+public class ${action.className}
+    extends ${action.className}Base {
+  /**
+   * defaultExecute
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward preExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = null;
+
+    // Add your code here...
+    UserContext userContext = UserContext.getUserContext();
+    if(!userContext.isAuthenticated()) {
+        forward = mapping.findForward("login-required");
+    }
+    return forward;
+  }
+
+  /**
+   * defaultExecute
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward defaultExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = mapping.getInputForward();
+
+    // Add your code here...
+
+    return forward;
+  }
+
+  /**
+   * postExecute
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   */
+  public ActionForward postExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = null;
+
+    // Add your code here...
+
+    return forward;
+  }
+
+  /**
+   * postExecute
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   */
+  public ActionForward outBoundPreExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = null;
+
+    // Add your code here...
+    UserContext userContext = UserContext.getUserContext();
+    if(!userContext.isAuthenticated()) {
+        forward = mapping.findForward("login-required");
+    }
+
+    return forward;
+  }
+
+#foreach($submit in ${form.submits.values()})
+#set($submitName = "on${submit.name.toUpperCase().charAt(0)}${submit.name.substring(1, ${submit.name.length()})}")
+#set($outboundForm = ${action.getOutboundActionForms().get($submitName)})
+  /**
+   * $submitName
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+#if(${action.forwards.get("${submitName}")})
+    ActionForward forward = mapping.findForward(FORWARD_${submitName.toUpperCase()});
+#if($outboundForm)
+    ${outboundForm.className} ${outboundForm.identifier} = new ${outboundForm.className}();
+#if(${outboundForm.identifier} == "virtualForm")
+    virtualForm.setInboundForm(${form.identifier});
+#else
+    ${outboundForm.identifier}.setInboundForm(${form.identifier});
+#end
+    request.setAttribute("${outboundForm.identifier}_", ${outboundForm.identifier});
+#else
+    VirtualForm virtualForm = new VirtualForm();
+    virtualForm.setInboundForm(${form.identifier});
+    request.setAttribute("virtualForm", virtualForm);
+#end
+#else
+    ActionForward forward = mapping.getInputForward();
+#end
+    // Add your code here...
+
+    return forward;
+  }
+
+#end
+
+
+#foreach($inboundForm in ${action.inboundActionForms})
+  /**
+   * inbound${inboundForm.className}
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param inboundForm ${inboundForm.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward inbound${inboundForm.className}(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    ${inboundForm.className} inboundForm,
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = mapping.getInputForward();
+
+    // Add your code here...
+
+    return forward;
+  }
+
+#end
+}

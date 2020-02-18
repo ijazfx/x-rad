@@ -1,0 +1,46 @@
+package ${form.packageName};
+
+import javax.servlet.http.*;
+
+import org.apache.struts.action.*;
+
+/**
+ * Provides implementation validation for ${form.className} Action Form
+ * <p>Title: ${appModel.getTitle()}</p> 
+ * 
+ * <p>Copyright: Copyright (c) 2007</p> 
+ * 
+ * <p>Company: ${appModel.getCompany()}</p>
+ * 
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+public class ${form.className}
+    extends ${form.className}Base {
+  
+  /**
+   * A method to validate form fields.
+   * @param mapping ActionMapping
+   * @param request HttpServletRequest
+   * @return ActionErrors
+   */
+  public ActionErrors validate(ActionMapping mapping,
+                                 HttpServletRequest request) {
+    ActionErrors errors = null;
+    /** @todo Remove following line to avoid enforced validation */
+    errors = super.validate(mapping, request);
+    return errors;
+  }
+
+  /**
+   * A method to reset form fields.
+   * @param mapping ActionMapping
+   * @param request HttpServletRequest
+   */
+  public void reset(ActionMapping mapping, 
+                      HttpServletRequest request) {
+    /** @todo Remove following line to avoid enforced reset */
+    super.reset(mapping, request);
+  }
+}

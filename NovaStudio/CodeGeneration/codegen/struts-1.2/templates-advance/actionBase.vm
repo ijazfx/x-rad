@@ -1,0 +1,160 @@
+#if(!${action.getForwards().isEmpty()})
+#set($defaultForward = ${action.getForwards().values().iterator().next()})
+#end
+// Auto-generated class by x-RAD Struts 1.2 Code Generator Version 1.0. This
+// class is overwritten each time the code is regenerated so please do not
+// modify or add your code in this class but use extended class for
+// customization.
+package ${action.packageName};
+
+import java.lang.reflect.*;
+import javax.servlet.http.*;
+
+import org.apache.struts.action.*;
+import ${appModel.packageName}.util.*;
+#foreach ($inboundForm in ${action.inboundActionForms.values()})
+import ${inboundForm.packageName}.${inboundForm.className};
+#end
+
+public abstract class ${action.className}Base
+  extends Action {
+
+#if(!${action.getForwards().isEmpty()})
+  public static final String FORWARD_DEFAULT = "${defaultForward.name}";
+#else
+  public static final String FORWARD_DEFAULT = "x-rad-error";
+#end
+#foreach($forward in ${action.forwards.values()})
+  public static final String FORWARD_${forward.name.toUpperCase()} = "${forward.name}";
+#end
+
+  public ActionForward execute(ActionMapping mapping,
+                               ActionForm form,
+                               HttpServletRequest request,
+                               HttpServletResponse response) {
+    ActionForward forward = null;
+    VirtualForm virtualForm = (VirtualForm) form;
+    if(virtualForm.getInboundForm() != null) {
+      forward = preExecute(mapping, virtualForm, request, response);
+      forward = (forward == null) ? delegateExecute(mapping, virtualForm, request, response) : forward;
+      forward = (forward == null) ? mapping.findForward(FORWARD_DEFAULT) : forward;
+      postExecute(mapping, virtualForm, request, response);
+    }
+    else {
+      forward = preExecute(mapping, virtualForm, request, response);
+      forward = (forward == null) ? defaultExecute(mapping, virtualForm, request, response) : forward;
+      postExecute(mapping, virtualForm, request, response);
+      if(forward == null) {
+        throw new java.lang.UnsupportedOperationException(
+          "No input forward defined for ${action.packageName}.${action.className}!");
+      }
+    }
+    return forward;
+  }
+
+  /**
+   * delegateExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  private ActionForward delegateExecute(ActionMapping mapping,
+                                       VirtualForm virtualForm,
+                                       HttpServletRequest request,
+                                       HttpServletResponse response) {
+    ActionForward forward = null;
+    ActionForm form = (ActionForm) virtualForm.getInboundForm();
+    if(form == null) return forward;
+    String[] values = form.getClass().getName().split("[.]");
+    String methodName = "inbound" + values[values.length-1];
+    try {
+      Method method = getClass().getMethod(methodName,
+        new Class[] {ActionMapping.class,
+        VirtualForm.class,
+        form.getClass(),
+        HttpServletRequest.class,
+        HttpServletResponse.class});
+      forward = (ActionForward) method.invoke(this,
+        new Object[] {mapping,
+        virtualForm,
+        form,
+        request,
+        response});
+    }
+    catch (Exception ex) {
+      forward = defaultExecute(mapping, virtualForm, request, response);
+    }
+    return forward;
+  }
+
+  /**
+   * preExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public abstract ActionForward preExecute(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    HttpServletRequest request,
+    HttpServletResponse response);
+
+  /**
+   * defaultExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public abstract ActionForward defaultExecute(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    HttpServletRequest request,
+    HttpServletResponse response);
+
+  /**
+   * postExecute
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   */
+  public abstract void postExecute(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    HttpServletRequest request,
+    HttpServletResponse response);
+
+#foreach($inboundForm in ${action.inboundActionForms})
+  /**
+   * inbound${inboundForm.className}
+   *
+   * @param mapping ActionMapping
+   * @param virtualForm VirtualForm
+   * @param inboundForm ${inboundForm.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public abstract ActionForward inbound${inboundForm.className}(
+    ActionMapping mapping,
+    VirtualForm virtualForm,
+    ${inboundForm.className} inboundForm,
+    HttpServletRequest request,
+    HttpServletResponse response);
+
+#end
+}
+
+
+
+

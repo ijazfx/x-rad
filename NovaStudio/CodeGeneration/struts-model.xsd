@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.example.org"
+            targetNamespace="http://www.example.org"
+            elementFormDefault="qualified">
+  <xsd:element name="struts-model">
+    <xsd:annotation>
+      <xsd:documentation>
+        A sample element
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="struts-jsp" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="struts-form">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="form-property" minOccurs="0"
+                                 maxOccurs="unbounded">
+                      <xsd:complexType>
+                        <xsd:attribute name="name" type="xsd:string"/>
+                        <xsd:attribute name="type" type="xsd:string"/>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="struts-form-action">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                                 maxOccurs="unbounded" ref="local-forward"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="form-control" minOccurs="0"
+                           maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:attribute name="title" type="xsd:string"/>
+                  <xsd:attribute name="property" type="xsd:string"/>
+                  <xsd:attribute name="type" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="form-button" minOccurs="0"
+                           maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:attribute name="title" type="xsd:string"/>
+                  <xsd:attribute name="property" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="form-link" minOccurs="0"
+                           maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:attribute name="title" type="xsd:string"/>
+                  <xsd:attribute name="property" type="xsd:string"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="struts-action" maxOccurs="unbounded" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element minOccurs="0" maxOccurs="unbounded"
+                           ref="local-forward"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="local-forward"/>
+</xsd:schema>

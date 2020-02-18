@@ -1,0 +1,20 @@
+// Auto-generated class by x-RAD Struts 1.2 Code Generator Version 1.0. This
+// class is overwritten each time the code is regenerated so please do not
+// modify or add your code in this class but use extended class for
+// customization.
+package $virtualFormPackageName;
+
+import org.apache.struts.action.*;
+
+public final class VirtualForm
+    extends ActionForm {
+  ActionForm inboundForm;
+
+  public ActionForm getInboundForm() {
+    return inboundForm;
+  }
+
+  public void setInboundForm(ActionForm inboundForm) {
+    this.inboundForm = inboundForm;
+  }
+}

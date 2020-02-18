@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tiles-definitions>
+#foreach($jsp in ${model.jsps})
+#if(${jsp.useTilesFramework})
+  <definition extends="${jsp.tilesBaseDefinition}" name="${jsp.location}${jsp.jspFile}.tiles">
+#foreach($put in ${jsp.puts.keySet()})
+    <put name="$put" value="${jsp.puts.get($put)}" />
+#end
+  </definition>
+#end
+#end
+</tiles-definitions>

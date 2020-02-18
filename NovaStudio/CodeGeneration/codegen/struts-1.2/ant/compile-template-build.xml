@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<project default="compile-template">
+    <property name="basedir" value=""/>
+    <property name="destfile" value=""/>
+  <target name="compile-template">
+    <tstamp/>
+    <jar basedir="${basedir}" compress="yes" destfile="${destfile}"/>
+  </target>
+</project>

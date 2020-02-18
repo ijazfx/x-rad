@@ -1,0 +1,40 @@
+package ${appModel.packageName}.util;
+
+/**
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+import javax.servlet.http.*;
+//import net.sf.sojo.interchange.json.*;
+import java.sql.*;
+//import com.aramco.cad.util.json.*;
+
+
+public class AjaxUtility {
+
+  public static AjaxResponse getResponse(HttpServletRequest request) {
+    AjaxResponse response = (AjaxResponse) request.getAttribute("json_");
+    if(response == null) {
+      request.setAttribute("json_",response = new AjaxResponse());
+    }
+    return response;
+  }
+
+  public static void setResponse(HttpServletRequest request) {
+    try {
+      AjaxResponse response = getResponse(request);
+//      JSONSerializer serializer = new JSONSerializer();
+//      request.setAttribute("json",serializer.serialize(response));
+    }
+    catch (Exception ex) {
+      WebUtility.logError(ex);
+      request.setAttribute("json","{isError:true}");
+    }
+  }

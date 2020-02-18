@@ -1,0 +1,15 @@
+package ${appModel.packageName}.util;
+
+/**
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+public class PagingUtility {
+
+}

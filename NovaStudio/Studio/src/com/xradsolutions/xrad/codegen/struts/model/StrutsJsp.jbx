@@ -1,0 +1,20 @@
+[PropertyInfo]
+backingAction,com.xradsolutions.xrad.codegen.struts.model.StrutsAction,false,false, , ,true,<default>
+backingForm,com.xradsolutions.xrad.codegen.struts.model.StrutsForm,false,false, , ,true,<default>
+description,String,false,false,description,description,true,<default>
+generateSeparateLinksJsp,boolean,false,false, , ,true,<default>
+isGenerateSeparateLinksJsp,boolean,false,false, , ,false,<default>
+jspFile,String,false,false, , ,true,<default>
+jspTemplate,String,false,false, , ,true,<default>
+linksJspFile,String,false,false, , ,true,<default>
+linksJspTemplate,String,false,false, , ,true,<default>
+location,String,false,false, , ,true,<default>
+puts,java.util.LinkedHashMap,false,false, , ,true,<default>
+tilesBaseDefinition,String,false,false, , ,true,<default>
+title,String,false,false, , ,true,<default>
+useTilesFramework,boolean,false,false, , ,true,<default>
+[IconNames]
+
+
+
+

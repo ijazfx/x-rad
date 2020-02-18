@@ -1,0 +1,136 @@
+#set ($form = ${jsp.backingForm})
+#set ($action = ${jsp.backingAction})
+package ${action.packageName};
+
+import javax.servlet.http.*;
+
+import org.apache.struts.action.*;
+import com.aramco.adf.cms.*;
+import com.aramco.adf.log.*;
+import ${form.packageName}.${form.className};
+#foreach ($inboundForm in ${action.inboundActionForms.values()})
+import ${inboundForm.packageName}.${inboundForm.className};
+#end
+#foreach ($outboundForm in ${action.outboundActionForms.values()})
+#if($outboundForm)
+import ${outboundForm.packageName}.${outboundForm.className};
+#end
+#end
+
+/**
+ * Provides implementation for ${jsp.jspFile} including links and submits
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+public class ${action.className}
+    extends ${action.className}Base {
+
+
+
+
+  /**
+   * This method contains the logic to be executed when this page is loaded.
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward defaultExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = null;
+
+    forward = mapping.getInputForward();
+    loadPage(${form.identifier},request);
+
+
+    return forward;
+  }
+
+
+  /**
+   * Pre-requiset logic for all links on the page ${jsp.jspFile}
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward submitPreExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = null;
+
+
+    return forward;
+  }
+
+#foreach($submit in ${form.submits.values()})
+#set($submitName = "on${submit.name.toUpperCase().charAt(0)}${submit.name.substring(1, ${submit.name.length()})}")
+#set($outboundForm = ${action.getOutboundActionForms().get($submitName)})
+  /**
+   * Implementation for onClick event on '${submitName.substring(2)}' link in '${jsp.jspFile}' page
+   * On successful execution it forwards to ${outboundForm.className.substring(0,${outboundForm.className.lastIndexOf("Form")})}.jsp page.
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) {
+    ActionForward forward = submitPreExecute(mapping,${form.identifier},request,response);
+    if(forward!=null) return forward;
+#if(${action.forwards.get("${submitName}")})
+    forward = mapping.findForward(FORWARD_${submitName.toUpperCase()});
+#if($outboundForm)
+    ${outboundForm.className} ${outboundForm.identifier} = new ${outboundForm.className}();
+##    request.setAttribute("${outboundForm.identifier}_", ${outboundForm.identifier});
+    storeForm(request,${outboundForm.identifier});
+#else
+    VirtualForm virtualForm = new VirtualForm();
+    request.setAttribute("virtualForm", virtualForm);
+#end
+#else
+//    loadPage(request,${form.identifier});
+    forward = mapping.getInputForward();
+#end
+    // Add your code here...
+
+    return forward;
+  }
+
+#end
+
+
+  /**
+   * For any pre-requisite implementation for ${jsp.jspFile}
+   *
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   */
+  public void loadPage(
+    ${form.className} ${form.identifier},
+    HttpServletRequest request) {
+
+  }
+
+}

@@ -1,0 +1,45 @@
+package ${appModel.packageName}.util;
+
+/**
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+import java.sql.*;
+import java.util.*;
+import javax.servlet.http.*;
+
+
+public class UserContext {
+  private boolean authenticated;
+
+  private static final String APP_NAME = "${modelFileName}"; // Put project name
+  private static final String USER_CONTEXT = APP_NAME + "_user_context";
+
+  private UserContext() {
+    super();
+  }
+
+  public static UserContext getUserContext(HttpServletRequest request) {
+    HttpSession session = request.getSession();
+    UserContext context;
+    if ( (context = (UserContext) session.getAttribute(USER_CONTEXT)) == null) {
+      context = new UserContext();
+      session.setAttribute(USER_CONTEXT, context);
+    }
+    return context;
+  }
+
+  public boolean isAuthenticated() {
+    return authenticated;
+  }
+
+
+
+}

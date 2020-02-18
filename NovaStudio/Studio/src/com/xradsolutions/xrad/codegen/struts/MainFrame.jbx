@@ -1,0 +1,25 @@
+[PropertyInfo]
+loProperties,java.awt.BorderLayout,false,false, , ,false,<default>
+mbMain,javax.swing.JMenuBar,false,false, , ,false,<default>
+miFile,javax.swing.JMenu,false,false, , ,false,<default>
+miFileExit,javax.swing.JMenuItem,false,false, , ,false,<default>
+miFileSave,javax.swing.JMenuItem,false,false, , ,false,<default>
+miHelp,javax.swing.JMenu,false,false, , ,false,<default>
+miHelpAbout,javax.swing.JMenuItem,false,false, , ,false,<default>
+miModel,javax.swing.JMenu,false,false, , ,false,<default>
+miModelGenerateCode,javax.swing.JMenuItem,false,false, , ,false,<default>
+miModelSettings,javax.swing.JMenuItem,false,false, , ,false,<default>
+miTools,javax.swing.JMenu,false,false, , ,false,<default>
+miToolsConfigureThemes,javax.swing.JMenuItem,false,false, , ,false,<default>
+model,com.xradsolutions.xrad.codegen.struts.model.StrutsModel,false,false, , ,false,<default>
+modelFile,java.io.File,false,false, , ,false,<default>
+pnlProperties,javax.swing.JPanel,false,false, , ,false,<default>
+spStrutsStructure,javax.swing.JSplitPane,false,false, , ,false,<default>
+spTreStrutsStructure,javax.swing.JScrollPane,false,false, , ,false,<default>
+tpFrame,javax.swing.JTabbedPane,false,false, , ,false,<default>
+treStrutsStructure,javax.swing.JTree,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

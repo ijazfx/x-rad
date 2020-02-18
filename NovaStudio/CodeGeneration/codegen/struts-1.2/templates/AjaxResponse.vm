@@ -1,0 +1,114 @@
+package ${appModel.packageName}.util;
+
+/**
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+import java.io.*;
+import javax.servlet.http.*;
+
+public class AjaxResponse implements Serializable{
+  private String method;
+  private String message;
+  private boolean error;
+  private boolean unAuthorized;
+  private boolean successful = true;
+  private Object object;
+  private String count;
+  private String orderBy;
+  private String orderType;
+  public AjaxResponse() {
+    super();
+  }
+
+  public void setMethod(String method) {
+    this.method = method;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public void setError(boolean error) {
+    this.error = error;
+  }
+
+  public void setUnAuthorized(boolean unAuthorized) {
+
+    this.unAuthorized = unAuthorized;
+  }
+
+  public void setSuccessful(boolean successful) {
+    this.successful = successful;
+  }
+
+  public void setObject(Object object) {
+    this.object = object;
+  }
+
+  public void setCount(String count) {
+    this.count = count;
+  }
+
+  public void setOrderBy(String orderBy) {
+    this.orderBy = orderBy;
+  }
+
+  public void setOrderType(String orderType) {
+    this.orderType = orderType;
+  }
+
+  public String getMethod() {
+    return method;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public boolean getError() {
+    return error;
+  }
+
+  public boolean getUnAuthorized() {
+
+    return unAuthorized;
+  }
+
+  public boolean getSuccessful() {
+    return successful;
+  }
+
+  public Object getObject() {
+    return object;
+  }
+
+  public String getCount() {
+    return count;
+  }
+
+  public String getOrderBy() {
+    return orderBy;
+  }
+
+  public String getOrderType() {
+    return orderType;
+  }
+
+  /**
+   * close
+   *
+   * @param request HttpServletRequest
+   */
+  public void close(HttpServletRequest request) {
+    AjaxUtility.setResponse(request);
+  }
+
+}

@@ -1,0 +1,27 @@
+package ${appModel.packageName}.util;
+
+/**
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+public class WebUtility {
+  //private static EventLogger logger = EventLogFactory.getEventLogger();
+
+  public static void logError(Throwable ex) {
+    //logger.log(EventLogger.ERROR,ex);
+  }
+
+  public static void logWarning(Throwable ex) {
+    //logger.log(EventLogger.WARNING,ex);
+  }
+
+  public static void logInfo(String message) {
+    //logger.log(EventLogger.INFO,message);
+  }
+}

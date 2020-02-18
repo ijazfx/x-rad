@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Farrukh Ijaz (Aramco) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="app-model">
+    <xs:annotation>
+      <xs:documentation>Comment describing your root element</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="view" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="type" type="xs:string" use="required"/>
+                  <xs:attribute name="title" type="xs:string" use="optional"/>
+                  <xs:attribute name="display-type" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="submit-method" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="title" type="xs:string" use="optional"/>
+                  <xs:attribute name="display-type" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="return-value" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="text" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+            <xs:attribute name="title" type="xs:string" use="required"/>
+            <xs:attribute name="description" type="xs:string" use="optional"/>
+            <xs:attribute name="package-name" type="xs:string" use="required"/>
+            <xs:attribute name="stereo-type" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="process" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="return-value" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="text" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+            <xs:attribute name="description" type="xs:string" use="optional"/>
+            <xs:attribute name="package-name" type="xs:string" use="required"/>
+            <xs:attribute name="stereo-type" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="interaction" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="source">
+                <xs:complexType>
+                  <xs:choice>
+                    <xs:element name="source-view" minOccurs="0">
+                      <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                        <xs:attribute name="submit-method-name" type="xs:string" use="optional"/>
+                        <xs:attribute name="return-value-text" type="xs:string" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="source-process" minOccurs="0">
+                      <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                        <xs:attribute name="return-value-text" type="xs:string" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                  <xs:attribute name="source-type" type="xs:string" use="optional"/>
+                  <xs:attribute name="name" type="xs:string"/>
+                  <xs:attribute name="id" type="xs:string" use="optional"/>
+                  <xs:attribute name="package-name" type="xs:string" use="optional"/>
+                  <xs:attribute name="interaction-type"/>
+                  <xs:attribute name="value"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="target">
+                <xs:complexType>
+                  <xs:choice>
+                    <xs:element name="target-view" minOccurs="0">
+                      <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="target-process" minOccurs="0">
+                      <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:choice>
+                  <xs:attribute name="target-type" type="xs:string" use="optional"/>
+                  <xs:attribute name="name" type="xs:string"/>
+                  <xs:attribute name="id" type="xs:string" use="optional"/>
+                  <xs:attribute name="package-name" type="xs:string" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:string" use="optional"/>
+      <xs:attribute name="id" type="xs:string" use="optional"/>
+      <xs:attribute name="title" type="xs:string" use="optional"/>
+      <xs:attribute name="description" type="xs:string" use="optional"/>
+      <xs:attribute name="package-name" type="xs:string" use="required"/>
+      <xs:attribute name="version" type="xs:string" use="optional"/>
+      <xs:attribute name="author" type="xs:string" use="optional"/>
+      <xs:attribute name="company" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

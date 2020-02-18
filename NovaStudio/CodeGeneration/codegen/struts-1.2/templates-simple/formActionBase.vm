@@ -1,0 +1,259 @@
+#set ($form = ${jsp.backingForm})
+#set ($action = ${jsp.backingAction})
+#if(!${action.getForwards().isEmpty()})
+#set($defaultForward = ${action.getForwards().values().iterator().next()})
+#end
+package ${action.packageName};
+
+import javax.servlet.http.*;
+import java.lang.reflect.*;
+import org.apache.struts.action.*;
+import com.aramco.adf.log.*;
+import ${appModel.packageName}.util.*;
+import ${form.packageName}.${form.className};
+#foreach ($inboundForm in ${action.inboundActionForms.values()})
+import ${inboundForm.packageName}.${inboundForm.className};
+#end
+#foreach ($outboundForm in ${action.outboundActionForms.values()})
+#if($outboundForm)
+import ${outboundForm.packageName}.${outboundForm.className};
+#end
+#end
+
+/**
+ * Provides implementation for ${jsp.jspFile} including links and submits
+ * <p>Title: ${appModel.getTitle()}</p>
+ *
+ * <p>Copyright: Copyright (c) 2007</p>
+ *
+ * <p>Company: ${appModel.getCompany()}</p>
+ *
+ * @author ${appModel.getAuthor()}
+ * @version 1.0
+ */
+
+public abstract class ${action.className}Base
+  extends Action {
+
+  protected EventLogger logger = EventLogFactory.getEventLogger();
+
+
+#if(!${action.getForwards().isEmpty()})
+  public static final String FORWARD_DEFAULT = "${defaultForward.name}";
+#else
+  public static final String FORWARD_DEFAULT = "app-error";
+#end
+#foreach($forward in ${action.forwards.values()})
+  public static final String FORWARD_${forward.name.toUpperCase()} = "${forward.name}";
+#end
+
+  public ActionForward execute(ActionMapping mapping,
+                               ActionForm form,
+                               HttpServletRequest request,
+                               HttpServletResponse response) throws Exception {
+    WebUtilityInitializer.initialize(request,response);
+    ${form.className} ${form.identifier} = loadForm(request,(${form.className})form);
+    ActionForward forward = null;
+#set ($counter = 0)
+#foreach($submit in ${form.submits.values()})
+#set($submitName = "on${submit.name.toUpperCase().charAt(0)}${submit.name.substring(1, ${submit.name.length()})}")
+#set($outboundForm = ${action.getOutboundActionForms().get($submitName)})
+#if($counter == 0)
+    if(${form.identifier}.getMethod().equals("$submitName")) {
+      forward = ${submitName}(mapping,${form.identifier},request,response);
+#end
+#if($counter > 0)
+    else if(${form.identifier}.getMethod().equals("$submitName")) {
+      forward = ${submitName}(mapping,${form.identifier},request,response);
+#end
+    }
+#set( $counter = $counter + 1)
+#end
+##   #if($counter > 0) else #end if (${form.identifier}.getMethod().length()>0) {
+##      try {
+##        Method method = getClass().getDeclaredMethod(${form.identifier}.getMethod(),
+##            new Class[] {
+##            ActionMapping.class, ${form.className}.class, HttpServletRequest.class,
+##            HttpServletResponse.class
+##        });
+##        forward = (ActionForward) method.invoke(this,new Object[]{mapping,${form.identifier},request,response});
+##      } catch (InvocationTargetException ex) {
+##        Exception th = (Exception) ex.getTargetException();
+##        logger.log(EventLogger.ERROR,th);
+##        throw th;
+##      } catch (Exception ex) {
+##        logger.log(EventLogger.WARNING,ex);
+##      }
+##    }
+#if($counter == 0)    forward = defaultExecute(mapping,${form.identifier},request,response);
+#else    else {
+      forward = defaultExecute(mapping,${form.identifier},request,response);
+    }
+#end
+    if(forward == null) forward = mapping.getInputForward();
+    return forward;
+  }
+
+
+
+
+  /**
+   * defaultExecute
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   */
+  public abstract ActionForward defaultExecute(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response);
+
+
+
+
+
+#foreach($submit in ${form.submits.values()})
+#set($submitName = "on${submit.name.toUpperCase().charAt(0)}${submit.name.substring(1, ${submit.name.length()})}")
+#set($outboundForm = ${action.getOutboundActionForms().get($submitName)})
+  /**
+   * $submitName
+   *
+   * @param mapping ActionMapping
+   * @param ${form.identifier} ${form.className}
+   * @param request HttpServletRequest
+   * @param response HttpServletResponse
+   * @return ActionForward
+   * @throws java.lang.Exception
+   */
+#if(${submitName.equals("onNextPage_")})
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) throws Exception {
+      try {
+	WebUtility.storeNextPage();
+        loadPage(${form.identifier},request);
+	return mapping.getInputForward();
+      } catch (Exception ex) {
+	logger.log(EventLogger.ERROR,ex);
+	return mapping.findForward("${modelFileName}-error");
+      }
+    }
+
+#elseif(${submitName.equals("onPreviousPage_")})
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) throws Exception {
+      try {
+	WebUtility.storePreviousPage();
+        loadPage(${form.identifier},request);
+	return mapping.getInputForward();
+      } catch (Exception ex) {
+	logger.log(EventLogger.ERROR,ex);
+	return mapping.findForward("${modelFileName}-error");
+      }
+    }
+
+#elseif(${submitName.equals("onGotoPage_")})
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) throws Exception {
+      try {
+	WebUtility.storePageNo(Integer.parseInt(${form.identifier}.getPageNo_()));
+        loadPage(${form.identifier},request);
+	return mapping.getInputForward();
+      } catch (Exception ex) {
+	logger.log(EventLogger.ERROR,ex);
+	return mapping.findForward("${modelFileName}-error");
+      }
+    }
+
+#elseif(${submitName.equals("onOrderBy_")})
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) throws Exception {
+      try {
+	WebUtility.setPageOrderBy(${form.identifier}.getOrderBy_());
+        loadPage(${form.identifier},request);
+	return mapping.getInputForward();
+      } catch (Exception ex) {
+	logger.log(EventLogger.ERROR,ex);
+	return mapping.findForward("${modelFileName}-error");
+      }
+    }
+
+
+#elseif(${submitName.equals("onRefreshPage_")})
+  public ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) throws Exception {
+      try {
+	WebUtility.storeCurrentPage(false);
+        loadPage(${form.identifier},request);
+	return mapping.getInputForward();
+      } catch (Exception ex) {
+	logger.log(EventLogger.ERROR,ex);
+	return mapping.findForward("${modelFileName}-error");
+      }
+    }
+
+
+#else
+  public abstract ActionForward $submitName(
+    ActionMapping mapping,
+    ${form.className} ${form.identifier},
+    HttpServletRequest request,
+    HttpServletResponse response) throws Exception;
+#end
+
+#end
+
+  /**
+   * Stores ActionForm in the request for the target Action
+   * @param request HttpServletRequest
+   * @param form ActionForm
+   */
+
+
+  public void storeForm(HttpServletRequest request, ActionForm form) {
+    WebUtility.storeForm(request,form);
+##    String name = form.getClass().getName().substring(form.getClass().getName().lastIndexOf(".")+1);
+##    name = ""+Character.toLowerCase(name.charAt(0))+name.substring(1);
+##    request.setAttribute("_"+name,form);
+  }
+
+  /**
+   * Return ${form.className} stored in the request
+   * @param request HttpServletRequest
+   * @param ${form.identifier} ${form.className}
+   * @return ${form.className}
+   */
+
+  public ${form.className} loadForm(HttpServletRequest request,${form.className} ${form.identifier}) {
+    Object form = request.getAttribute("_${form.identifier}");
+    if(form!=null) {
+      request.setAttribute("${form.identifier}",form);
+      ${form.identifier} = (${form.className}) form;
+    }
+    return ${form.identifier};
+  }
+
+  public abstract void loadPage(${form.className} ${form.identifier},
+			    HttpServletRequest request) throws Exception;
+
+
+
+}

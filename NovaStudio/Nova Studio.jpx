@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--JBuilder XML Project-->
+<project>
+  <property category="config" name="autoformat.java.keepEndOfLines" value="true"/>
+  <property category="config" name="autoformat.java.maxNumOfEmptyNeightbouringLines" value="1"/>
+  <property category="config" name="options.umlVersion" value="14"/>
+  <property category="config" name="parser.java.syntax" value="1.5"/>
+  <property category="config" name="project.encoding" value="Cp1252"/>
+  <property category="generalFormatting2" name="overrideBasicFormatting" value="1"/>
+  <property category="javaFormatting" name="packagePrefixGroups" value="java;javax;BLANK_LINE;java.awt;javax.swing;BLANK_LINE;org;(*)"/>
+  <property category="javadoc" name="custom.tags.1" value="todo;a;To Do:"/>
+  <property category="path" name="DefaultDiagram" value="Studio/diagrams"/>
+  <property category="path" name="Diagram" value="Studio/diagrams"/>
+  <property category="personality" name="personality" value="com.borland.jbuilder.personality.JBuilderUMLPersonality "/>
+  <property category="runtime" name="ConfigurationCount" value="2"/>
+  <property category="runtime" name="DefaultConfiguration" value="-1"/>
+  <property category="runtime.0" name="BuildTargetOnRun" value="com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;make"/>
+  <property category="runtime.0" name="ConfigurationName" value="Advance"/>
+  <property category="runtime.0" name="RunnableType" value="com.borland.jbuilder.runtime.ApplicationRunner"/>
+  <property category="runtime.0" name="application.class" value="com.xradsolutions.xrad.studio.XRadApp"/>
+  <property category="runtime.0" name="application.vmparameters" value="-DXRAD_HOME=&quot;($ProjectDir)\CodeGeneration&quot; -Dtemplates=&quot;templates-advance&quot;"/>
+  <property category="runtime.1" name="BuildTargetOnRun" value="com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;make"/>
+  <property category="runtime.1" name="ConfigurationName" value="Simple"/>
+  <property category="runtime.1" name="RunnableType" value="com.borland.jbuilder.runtime.ApplicationRunner"/>
+  <property category="runtime.1" name="application.class" value="com.xradsolutions.xrad.studio.XRadApp"/>
+  <property category="runtime.1" name="application.vmparameters" value="-DXRAD_HOME=&quot;($ProjectDir)\CodeGeneration&quot; -Dtemplates=templates-simple"/>
+  <property category="runtime.2" name="BuildTargetOnRun" value="com.borland.jbuilder.build.ProjectBuilder$ProjectBuildAction;make"/>
+  <property category="runtime.2" name="ConfigurationName" value="ase-1.0"/>
+  <property category="runtime.2" name="RunnableType" value="com.borland.jbuilder.runtime.ApplicationRunner"/>
+  <property category="runtime.2" name="application.class" value="com.xradsolutions.xrad.studio.XRadApp"/>
+  <property category="runtime.2" name="application.vmparameters" value="-DXRAD_HOME=&quot;($ProjectDir)\CodeGeneration&quot; -Dtemplates=templates-ase-1.0"/>
+  <property category="serverservices" name="disabled.services" value="jdatastore"/>
+  <property category="serverservices" name="single.server.name" value=""/>
+  <property category="sys" name="AuthorLabel" value="@author"/>
+  <property category="sys" name="BackupPath" value="bak"/>
+  <property category="sys" name="CheckStable" value="1"/>
+  <property category="sys" name="Company" value="x-RAD Solutions"/>
+  <property category="sys" name="CompanyLabel" value="Company:"/>
+  <property category="sys" name="Copyright" value="Copyright (c) 2006"/>
+  <property category="sys" name="CopyrightLabel" value="Copyright:"/>
+  <property category="sys" name="DefaultPath" value="Studio/src"/>
+  <property category="sys" name="Description" value=""/>
+  <property category="sys" name="DescriptionLabel" value="Description:"/>
+  <property category="sys" name="DocPath" value="doc"/>
+  <property category="sys" name="ExcludeClassEnabled" value="0"/>
+  <property category="sys" name="IncludeTestPath" value="1"/>
+  <property category="sys" name="InstanceVisibility" value="2"/>
+  <property category="sys" name="JDK" value="java version 1.5.0_06-b05"/>
+  <property category="sys" name="JvmVersion" value="1.3"/>
+  <property category="sys" name="LastTag" value="0"/>
+  <property category="sys" name="Libraries" value="x-RAD Studio;Ant"/>
+  <property category="sys" name="MakeStable" value="0"/>
+  <property category="sys" name="OutPath" value="classes"/>
+  <property category="sys" name="SourcePath" value="CodeGeneration/src;Client/src;Studio/src;CoreAPI/src;test"/>
+  <property category="sys" name="SourceVersion" value="1.5"/>
+  <property category="sys" name="TestPath" value="test"/>
+  <property category="sys" name="Title" value="x-RAD Studio"/>
+  <property category="sys" name="TitleLabel" value="Title:"/>
+  <property category="sys" name="Version" value="1.0"/>
+  <property category="sys" name="VersionLabel" value="@version"/>
+  <property category="sys" name="WorkingDirectory" value="."/>
+  <property category="team" name="ignorePath.0" value=".localdata"/>
+  <property category="team" name="ignorePath.1" value="CodeGeneration/classes"/>
+  <property category="team" name="ignorePath.10" value="hs_err_pid624.log"/>
+  <property category="team" name="ignorePath.11" value="velocity.log"/>
+  <property category="team" name="ignorePath.2" value="CoreAPI/classes"/>
+  <property category="team" name="ignorePath.3" value="Studio/classes"/>
+  <property category="team" name="ignorePath.4" value="Studio/diagrams"/>
+  <property category="team" name="ignorePath.5" value="bak"/>
+  <property category="team" name="ignorePath.6" value="classes"/>
+  <property category="team" name="ignorePath.7" value="doc"/>
+  <property category="team" name="ignorePath.8" value="x-rad-studio-1.0-win.exe"/>
+  <property category="team" name="ignorePath.9" value="x-rad-studio-1.0.jar"/>
+  <property category="together" name="language" value="java"/>
+  <node name="CodeGeneration" type="NavigationDirectory">
+    <property category="directorynode" name="showSubdirectories" value="1"/>
+    <property category="directorynode" name="url" value="CodeGeneration"/>
+  </node>
+  <node name="Native Executable" type="Archive">
+    <property category="archiving" name="archiverClass" value="com.borland.jbuilder.wizard.archive.ExecutableArchiver"/>
+    <property category="archiving" name="buildWithProject" value="0"/>
+    <property category="archiving" name="contentRules.1" value="I:**/*.*"/>
+    <property category="archiving" name="executableEnabled.1" value="0"/>
+    <property category="archiving" name="executableEnabled.2" value="0"/>
+    <property category="archiving" name="executableEnabled.3" value="0"/>
+    <property category="archiving" name="executableEnabled.4" value="0"/>
+    <property category="archiving" name="executableEnabled.5" value="0"/>
+    <property category="archiving" name="executableFiles.1" value="x-rad-studio-1.0-win.exe"/>
+    <property category="archiving" name="executableFiles.2" value=""/>
+    <property category="archiving" name="executableFiles.3" value=""/>
+    <property category="archiving" name="executableFiles.4" value=""/>
+    <property category="archiving" name="executableFiles.5" value=""/>
+    <property category="archiving" name="libraryStates.1" value="3:x-RAD Studio"/>
+    <property category="archiving" name="libraryStates.2" value="3:Ant"/>
+    <property category="archiving" name="manifestMainClass" value="com.xradsolutions.xrad.studio.XRadApp"/>
+    <property category="archiving" name="obfuscator" value="RetroGuard for J2ME"/>
+    <property category="archiving" name="targetCompressed" value="1"/>
+    <property category="archiving" name="targetPath" value="x-rad-studio-1.0.jar"/>
+    <property category="archiving" name="usingRules" value="1"/>
+  </node>
+  <node name="Update Development Package" type="ExternalTask">
+    <property category="external" name="buildWithProject" value="0"/>
+    <property category="external" name="executable" value="W:\Projects\NovaMethods\NovaStudio\update-dev.bat"/>
+    <property category="external" name="phase" value="package"/>
+  </node>
+  <file path="readme.txt"/>
+  <file path="update-dev.bat"/>
+</project>
